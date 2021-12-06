@@ -84,7 +84,85 @@ featBrands.on('slideChange', function () {
   sliderLogos[activeIndex].classList.add('active');
 });
 
-
+function ready(callback){
+  // in case the document is already rendered
+  if (document.readyState!='loading') callback();
+  // modern browsers
+  else if (document.addEventListener) document.addEventListener('DOMContentLoaded', callback);
+  // IE <= 8
+  else document.attachEvent('onreadystatechange', function(){
+    if (document.readyState=='complete') callback();
+  });
+  }
+  
+  ready(function () {
+  
+  var toggleNav = document.getElementById('menuToggle');
+  var navDrawer = document.getElementById('mobile-menu');
+  var html = document.querySelector('html');
+  var body = document.querySelector('body');
+  
+  toggleNav.addEventListener('click', function () {
+    // console.log('mobile nav');
+    this.classList.toggle('is-active');
+    navDrawer.classList.toggle('active');
+    html.classList.toggle('no-scroll');
+    body.classList.toggle('no-scroll');
+  
+  });
+  
+  
+  
+  });
+  
+  function menuSetup() {
+  let showDelay = 400, hideDelay = 800;
+  let menuEnterTimer, menuLeaveTimer;
+  let allMenuItems = document.querySelectorAll('.nav .dropdown');
+  let menuDrawers = document.querySelectorAll('.dropdown-menu');
+  
+  for (let i = 0; i < allMenuItems.length; i++) {
+  let childDrawer;
+  allMenuItems[i].addEventListener('mouseenter', function () {
+    let menuChildren = this.childNodes;
+    // console.log('thisItem', thisItem);
+    for (let k = 0; k < menuChildren.length; k++) {
+      // console.log('menu children: ', menuChildren[k].classList)
+      let thisChildClasses = menuChildren[k].classList
+      if (thisChildClasses.contains('dropdown-menu')) {
+        childDrawer = menuChildren[k];
+      }
+    }
+    // clear the opposite timer
+    clearTimeout(menuLeaveTimer);
+    // add active class after a delay
+    menuEnterTimer = setTimeout(function () {
+              // hide any active dropdowns
+    for (let j = 0; j < menuDrawers.length; j++) {
+      menuDrawers[j].classList.remove('active');
+    }
+      
+        childDrawer.classList.add('active');
+      }, showDelay);
+  
+  });
+  
+      // triggered when user's mouse leaves the menu item
+  allMenuItems[i].addEventListener('mouseleave', function() {
+    // let thisItem = this.getElementsByClassName('dropdown-menu');
+  
+    // clear the opposite timer
+    clearTimeout(menuEnterTimer);
+    // remove active class after a delay
+    menuLeaveTimer = setTimeout(function() {
+      childDrawer.classList.remove('active');
+    }, hideDelay);
+  });
+  
+  }
+  }
+  
+  document.addEventListener('DOMContentLoaded', menuSetup);
 
 });
 
@@ -118,120 +196,10 @@ input[0][isNegative ? 'stepDown' : 'stepUp']()
 }
 })
 
-// GIFT GUIDE SWIPER SETTINGS
-// const allSwiperElements = document.querySelectorAll('.gift-swiper');
-// if (allSwiperElements) {
-//   console.log(allSwiperElements.length);
-//   let swiperObjects = [];
-//   for (i = 0; i < allSwiperElements.length; i++) {
-//      swiperObjects[i] = new Swiper(`swiper${i+1}`, {
-//       // Optional parameters
-//       direction: 'horizontal',
-//       loop: true,
-//       slidesPerView: 5,
-//       navigation: {
-//         nextEl: '.swiper-button-next',
-//         prevEl: '.swiper-button-prev',
-//       },
-//     });
-//   }
-//   console.log(swiperObjects);
-// }
-
 
 
 
 })(jQuery);
 
-function ready(callback){
-// in case the document is already rendered
-if (document.readyState!='loading') callback();
-// modern browsers
-else if (document.addEventListener) document.addEventListener('DOMContentLoaded', callback);
-// IE <= 8
-else document.attachEvent('onreadystatechange', function(){
-  if (document.readyState=='complete') callback();
-});
-}
 
-ready(function () {
-
-var toggleNav = document.getElementById('menuToggle');
-var navDrawer = document.getElementById('mobile-menu');
-var html = document.querySelector('html');
-var body = document.querySelector('body');
-
-toggleNav.addEventListener('click', function () {
-  // console.log('mobile nav');
-  this.classList.toggle('is-active');
-  navDrawer.classList.toggle('active');
-  html.classList.toggle('no-scroll');
-  body.classList.toggle('no-scroll');
-
-});
-
-
-
-});
-
-// DESKTOP NAVIGATION
-
-//   var delay = 500, setTimeoutConst;
-
-// $(".dropdown").on('mouseenter', function() {
-//   setTimeoutConst = setTimeout(function() {
-//     $(this).find(".dropdown-menu").addClass("active");
-//   }, delay);
-// }, function() {
-//   clearTimeout(setTimeoutConst);
-// });
-
-function menuSetup() {
-let showDelay = 400, hideDelay = 800;
-let menuEnterTimer, menuLeaveTimer;
-let allMenuItems = document.querySelectorAll('.nav .dropdown');
-let menuDrawers = document.querySelectorAll('.dropdown-menu');
-
-for (let i = 0; i < allMenuItems.length; i++) {
-let childDrawer;
-allMenuItems[i].addEventListener('mouseenter', function () {
-  let menuChildren = this.childNodes;
-  // console.log('thisItem', thisItem);
-  for (let k = 0; k < menuChildren.length; k++) {
-    // console.log('menu children: ', menuChildren[k].classList)
-    let thisChildClasses = menuChildren[k].classList
-    if (thisChildClasses.contains('dropdown-menu')) {
-      childDrawer = menuChildren[k];
-    }
-  }
-  // clear the opposite timer
-  clearTimeout(menuLeaveTimer);
-  // add active class after a delay
-  menuEnterTimer = setTimeout(function () {
-            // hide any active dropdowns
-  for (let j = 0; j < menuDrawers.length; j++) {
-    menuDrawers[j].classList.remove('active');
-  }
-    
-      childDrawer.classList.add('active');
-    }, showDelay);
-
-});
-
-    // triggered when user's mouse leaves the menu item
-allMenuItems[i].addEventListener('mouseleave', function() {
-  // let thisItem = this.getElementsByClassName('dropdown-menu');
-
-  // clear the opposite timer
-  clearTimeout(menuEnterTimer);
-  // remove active class after a delay
-  menuLeaveTimer = setTimeout(function() {
-    childDrawer.classList.remove('active');
-  }, hideDelay);
-});
-
-}
-}
-
-document.addEventListener('DOMContentLoaded', menuSetup);
 
