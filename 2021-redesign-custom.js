@@ -75,27 +75,22 @@ var sliderLogos = document.getElementsByClassName('carousel-logo');
 
 featBrands.on('slideChange', function () {
 
-  Array.from(sliderLogos).forEach(function (el) {
-    el.classList.remove('active');
+      Array.from(sliderLogos).forEach(function (el) {
+        el.classList.remove('active');
 
-  });
-  
-  var activeIndex = featBrands.activeIndex;
-  sliderLogos[activeIndex].classList.add('active');
-});
+      });
+      
+      var activeIndex = featBrands.activeIndex;
+      sliderLogos[activeIndex].classList.add('active');
+    });
 
-function ready(callback){
-  // in case the document is already rendered
-  if (document.readyState!='loading') callback();
-  // modern browsers
-  else if (document.addEventListener) document.addEventListener('DOMContentLoaded', callback);
-  // IE <= 8
-  else document.attachEvent('onreadystatechange', function(){
-    if (document.readyState=='complete') callback();
-  });
-  }
+
   
-  ready(function () {
+  function menuSetup() {
+  let showDelay = 400, hideDelay = 800;
+  let menuEnterTimer, menuLeaveTimer;
+  let allMenuItems = document.querySelectorAll('.nav .dropdown');
+  let menuDrawers = document.querySelectorAll('.dropdown-menu');
   
   var toggleNav = document.getElementById('menuToggle');
   var navDrawer = document.getElementById('mobile-menu');
@@ -110,16 +105,6 @@ function ready(callback){
     body.classList.toggle('no-scroll');
   
   });
-  
-  
-  
-  });
-  
-  function menuSetup() {
-  let showDelay = 400, hideDelay = 800;
-  let menuEnterTimer, menuLeaveTimer;
-  let allMenuItems = document.querySelectorAll('.nav .dropdown');
-  let menuDrawers = document.querySelectorAll('.dropdown-menu');
   
   for (let i = 0; i < allMenuItems.length; i++) {
   let childDrawer;
@@ -158,13 +143,10 @@ function ready(callback){
       childDrawer.classList.remove('active');
     }, hideDelay);
   });
-  
-  }
-  }
-  
-  document.addEventListener('DOMContentLoaded', menuSetup);
-
-});
+    } // end for loop
+  } // end menuSetup function
+  menuSetup();
+}); // end jQuery document.ready function
 
 // ATTENTIVE FOOTER SUBSCRIBE BUTTON
 
