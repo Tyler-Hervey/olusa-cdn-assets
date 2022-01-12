@@ -210,11 +210,10 @@ menuDrawers[i].addEventListener('mouseleave', function() {
   clearTimeout(menuEnterTimer);
   // remove active class after a delay
   menuLeaveTimer = setTimeout(function() {
-    let optionText = currentOption.textContent.trim().toLowerCase();
+
     for (i=0; i < menuDrawers.length; i++) {
       menuDrawers[i].classList.remove('active');
     }
-    currentOption.classList.remove('active');
   }, hideDelay);
 });
 
