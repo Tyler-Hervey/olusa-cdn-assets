@@ -73,7 +73,6 @@ var featBrands = new Swiper('.featured-brands-slider', {
 });
 
 var sliderLogos = document.getElementsByClassName('carousel-logo');
-// console.log(sliderLogos);
 
 featBrands.on('slideChange', function () {
 
@@ -132,7 +131,6 @@ var html = document.querySelector('html');
 var body = document.querySelector('body');
 
 toggleNav.addEventListener('click', function () {
-  // console.log('mobile nav');
   this.classList.toggle('is-active');
   navDrawer.classList.toggle('active');
   html.classList.toggle('no-scroll');
@@ -161,28 +159,18 @@ if (response.length === 0) {
 // DESKTOP NAVIGATION
 
 function menuSetup() {
-let showDelay = 400, hideDelay = 800;
+let showDelay = 600, hideDelay = 400;
 let menuEnterTimer, menuLeaveTimer;
-let allMenuItems = document.querySelectorAll('.nav .dropdown');
+let allMenuItems = document.querySelectorAll('.nav .dropdown-toggle');
 let menuDrawers = document.querySelectorAll('.dropdown-menu');
 
-console.log(menuDrawers.length, allMenuItems.length);
-
 for (let i = 0; i < menuDrawers.length; i++) {
-let childDrawer;
+
+
+
 allMenuItems[i].addEventListener('mouseenter', function () {
 
-  let menuChildren = this.childNodes;
-
   let currentOption = this;
-
-  // for (let k = 0; k < menuChildren.length; k++) {
-  //   console.log('menu children: ', menuChildren[k].classList)
-  //   let thisChildClasses = menuChildren[k].classList
-  //   if (thisChildClasses.contains('dropdown-menu')) {
-  //     childDrawer = menuChildren[k];
-  //   }
-  // }
 
 
   // clear the opposite timer
@@ -195,6 +183,7 @@ allMenuItems[i].addEventListener('mouseenter', function () {
   }
 
   let optionText = currentOption.textContent.trim().toLowerCase();
+
       switch (optionText) {
         case 'women':
           document.getElementById('dropdown-women').classList.add('active');
@@ -215,7 +204,6 @@ allMenuItems[i].addEventListener('mouseenter', function () {
 
     // triggered when user's mouse leaves the menu item
 menuDrawers[i].addEventListener('mouseleave', function() {
-  
   let currentOption = this;
   
   // clear the opposite timer
@@ -223,20 +211,23 @@ menuDrawers[i].addEventListener('mouseleave', function() {
   // remove active class after a delay
   menuLeaveTimer = setTimeout(function() {
     let optionText = currentOption.textContent.trim().toLowerCase();
-    switch (optionText) {
-      case 'women':
-        document.getElementById('dropdown-women').classList.remove('active');
-        break;
-        case 'men':
-          document.getElementById('dropdown-men').classList.remove('active');
-        break;
-        case 'activities':
-          document.getElementById('dropdown-activities').classList.remove('active');
-          break;
-        case 'footwear':
-          document.getElementById('dropdown-footwear').classList.remove('active');
-          break;
+    for (i=0; i < menuDrawers.length; i++) {
+      menuDrawers[i].classList.remove('active');
     }
+    // switch (optionText) {
+    //   case 'women':
+    //     document.getElementById('dropdown-women').classList.remove('active');
+    //     break;
+    //     case 'men':
+    //       document.getElementById('dropdown-men').classList.remove('active');
+    //     break;
+    //     case 'activities':
+    //       document.getElementById('dropdown-activities').classList.remove('active');
+    //       break;
+    //     case 'footwear':
+    //       document.getElementById('dropdown-footwear').classList.remove('active');
+    //       break;
+    // }
     currentOption.classList.remove('active');
   }, hideDelay);
 });
@@ -245,31 +236,4 @@ menuDrawers[i].addEventListener('mouseleave', function() {
 }
 
 document.addEventListener('DOMContentLoaded', menuSetup);
-
-
-
-
-
-
-// for (let k = 0; k < allMenuItems[i].childNodes.length; k++) {
-//   if (allMenuItems[i].childNodes[k].className == "dropdown-menu") {
-//     thisItem = allMenuItems[i].childNodes[k];
-//   }
-// };
-
-
-
-
-// $(".dropdown").on('mouseenter', function () {
-
-
-//   $(this).find(".dropdown-menu").addClass("active");
-//   let hoverTimeout = setTimeout(function () {
-//     console.log('moustenter event triggered');
-//     $(this).find(".dropdown-menu").addClass("active");
-//   }, 4000);
-
-//   clearTimeout(hoverTimeout);
-
-//   });
 
