@@ -214,20 +214,6 @@ menuDrawers[i].addEventListener('mouseleave', function() {
     for (i=0; i < menuDrawers.length; i++) {
       menuDrawers[i].classList.remove('active');
     }
-    // switch (optionText) {
-    //   case 'women':
-    //     document.getElementById('dropdown-women').classList.remove('active');
-    //     break;
-    //     case 'men':
-    //       document.getElementById('dropdown-men').classList.remove('active');
-    //     break;
-    //     case 'activities':
-    //       document.getElementById('dropdown-activities').classList.remove('active');
-    //       break;
-    //     case 'footwear':
-    //       document.getElementById('dropdown-footwear').classList.remove('active');
-    //       break;
-    // }
     currentOption.classList.remove('active');
   }, hideDelay);
 });
