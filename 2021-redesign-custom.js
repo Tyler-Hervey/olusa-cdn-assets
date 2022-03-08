@@ -159,22 +159,24 @@ if (response.length === 0) {
 // DESKTOP NAVIGATION
 
 function menuSetup() {
-let showDelay = 600, hideDelay = 400;
+let menuEnterDelay = 300, hideDelay = 300;
 let menuEnterTimer, menuLeaveTimer;
 let allMenuItems = document.querySelectorAll('.nav .dropdown-toggle');
 let menuDrawers = document.querySelectorAll('.dropdown-menu');
 
 for (let i = 0; i < menuDrawers.length; i++) {
 
-
-
 allMenuItems[i].addEventListener('mouseenter', function () {
 
   let currentOption = this;
 
+  // clear timer
+  if (menuEnterTimer != null) {
+    clearTimeout(menuEnterTimer);
+  }
 
   // clear the opposite timer
-  clearTimeout(menuLeaveTimer);
+  // clearTimeout(menuEnterTimer);
   // add active class after a delay
   menuEnterTimer = setTimeout(function () {
             // hide any active dropdowns
@@ -198,16 +200,20 @@ allMenuItems[i].addEventListener('mouseenter', function () {
             document.getElementById('dropdown-footwear').classList.add('active');
             break;
       }
-    }, showDelay);
+    }, menuEnterDelay);
 
+});
+
+allMenuItems[i].addEventListener('mouseleave', function(event){
+  if (menuEnterTimer != null) {
+    clearTimeout(menuEnterTimer);
+  }
 });
 
     // triggered when user's mouse leaves the menu item
 menuDrawers[i].addEventListener('mouseleave', function() {
   let currentOption = this;
-  
-  // clear the opposite timer
-  clearTimeout(menuEnterTimer);
+
   // remove active class after a delay
   menuLeaveTimer = setTimeout(function() {
 
@@ -215,6 +221,12 @@ menuDrawers[i].addEventListener('mouseleave', function() {
       menuDrawers[i].classList.remove('active');
     }
   }, hideDelay);
+});
+
+menuDrawers[i].addEventListener('mouseenter', function(){
+  if (menuLeaveTimer != null){
+    clearTimeout(menuLeaveTimer)
+  }
 });
 
 }
